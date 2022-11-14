@@ -39,7 +39,7 @@ exports.verifyToken = (req, res, next) => {
   }
 };
 
-exports.apiLimiter = new RateLimit({
+exports.apiLimiter = RateLimit({
   windowMs: 60 * 1000, // 1분
   max: 10,
   delayMs: 0,
