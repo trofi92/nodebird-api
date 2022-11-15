@@ -1,24 +1,20 @@
 const Sequelize = require("sequelize");
-//수정필요
+
 module.exports = class Guestbook extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
         name: {
-          type: Sequelize.STRING(20),
+          type: Sequelize.STRING(30),
+          allowNull: false,
+        },
+        content: {
+          type: Sequelize.STRING(140),
           allowNull: false,
         },
         email: {
-          type: Sequelize.STRING(40),
+          type: Sequelize.STRING(50),
           allowNull: true,
-        },
-        password: {
-          type: Sequelize.STRING(100),
-          allowNull: true,
-        },
-        content: {
-          type: Sequelize.STRING(300),
-          allowNull: false,
         },
       },
       {
@@ -33,10 +29,8 @@ module.exports = class Guestbook extends Sequelize.Model {
       }
     );
   }
-  //   static associate(db) {
-  //     db.Guestbook.belongsTo(db.User);
-  //     db.Guestbook.belongsToMany(db.Hashtag, {
-  //       through: "PostHashtag",
-  //     });
-  //   }
+
+  static associate(db) {
+    db.Guestbook.belongsTo(db.User);
+  }
 };
